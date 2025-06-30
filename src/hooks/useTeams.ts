@@ -247,62 +247,6 @@ export function useTeams(authUser: User | null) {
     }
   };
 
-  const joinTeamByInvite = async (teamId: string) => {
-    if (!authUser) throw new Error('User not authenticated');
-
-    try {
-      // Verify team exists
-      const { data: teamData, error: teamError } = await supabase
-        .from('teams')
-        .select('id, name, room_code, created_by')
-        .eq('id', teamId)
-        .single();
-
-      if (teamError || !teamData) {
-        throw new Error('Invalid invite link or team no longer exists');
-      }
-
-      // Check if user is already a member
-      const { data: existingMember, error: memberCheckError } = await supabase
-        .from('team_members')
-        .select('id')
-        .eq('team_id', teamData.id)
-        .eq('user_id', authUser.id)
-        .maybeSingle();
-
-      if (memberCheckError) {
-        console.error('Error checking membership:', memberCheckError);
-        throw new Error('Error checking team membership');
-      }
-
-      if (existingMember) {
-        throw new Error('You are already a member of this team');
-      }
-
-      // Add user as member
-      const { error: memberError } = await supabase
-        .from('team_members')
-        .insert({
-          team_id: teamData.id,
-          user_id: authUser.id,
-          role: 'member'
-        });
-
-      if (memberError) {
-        console.error('Error joining team:', memberError);
-        throw new Error('Failed to join team. Please try again.');
-      }
-
-      // Reload teams
-      await loadUserTeams();
-
-      return teamData;
-    } catch (error) {
-      console.error('Error joining team by invite:', error);
-      throw error;
-    }
-  };
-
   const leaveTeam = async (teamId: string) => {
     if (!authUser) throw new Error('User not authenticated');
 
@@ -326,21 +270,14 @@ export function useTeams(authUser: User | null) {
     }
   };
 
-  const generateInviteLink = (teamId: string) => {
-    const baseUrl = window.location.origin;
-    return `${baseUrl}/invite/${teamId}`;
-  };
-
   return {
     teams,
     currentTeam,
     loading,
     createTeam,
     joinTeam,
-    joinTeamByInvite,
     leaveTeam,
     refreshTeams: loadUserTeams,
-    setCurrentTeam,
-    generateInviteLink
+    setCurrentTeam
   };
 }

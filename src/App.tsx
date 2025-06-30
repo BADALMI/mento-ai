@@ -16,33 +16,7 @@ import Navigation from './components/Navigation';
 function App() {
   const { user: authUser, loading: authLoading, signOut } = useAuth();
   const { user, loading: userLoading, updateUser, addCheckIn, addJournalEntry, updateJournalEntry, deleteJournalEntry } = useUserData(authUser);
-  const { joinTeamByInvite } = useTeams(authUser);
   const [currentView, setCurrentView] = useState<'landing' | 'dashboard' | 'checkin' | 'team' | 'settings' | 'history' | 'journal' | 'mento'>('landing');
-
-  // Handle invite links
-  useEffect(() => {
-    const handleInviteLink = async () => {
-      const path = window.location.pathname;
-      const inviteMatch = path.match(/\/invite\/([a-f0-9-]+)/);
-      
-      if (inviteMatch && authUser && user) {
-        const teamId = inviteMatch[1];
-        try {
-          await joinTeamByInvite(teamId);
-          // Clear the invite from URL
-          window.history.replaceState({}, '', '/');
-          setCurrentView('team');
-        } catch (error: any) {
-          console.error('Error joining team via invite:', error);
-          alert(error.message || 'Failed to join team via invite link');
-          // Clear the invite from URL even on error
-          window.history.replaceState({}, '', '/');
-        }
-      }
-    };
-
-    handleInviteLink();
-  }, [authUser, user, joinTeamByInvite]);
 
   const navigateTo = (view: 'landing' | 'dashboard' | 'checkin' | 'team' | 'settings' | 'history' | 'journal' | 'mento') => {
     setCurrentView(view);
