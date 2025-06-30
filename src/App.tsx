@@ -15,10 +15,22 @@ import Navigation from './components/Navigation';
 
 function App() {
   const { user: authUser, loading: authLoading, signOut } = useAuth();
-  const { user, loading: userLoading, updateUser, addCheckIn, addJournalEntry, updateJournalEntry, deleteJournalEntry } = useUserData(authUser);
-  const [currentView, setCurrentView] = useState<'landing' | 'dashboard' | 'checkin' | 'team' | 'settings' | 'history' | 'journal' | 'mento'>('landing');
+  const {
+    user,
+    loading: userLoading,
+    updateUser,
+    addCheckIn,
+    addJournalEntry,
+    updateJournalEntry,
+    deleteJournalEntry,
+  } = useUserData(authUser);
+  const [currentView, setCurrentView] = useState<
+    'landing' | 'dashboard' | 'checkin' | 'team' | 'settings' | 'history' | 'journal' | 'mento'
+  >('landing');
 
-  const navigateTo = (view: 'landing' | 'dashboard' | 'checkin' | 'team' | 'settings' | 'history' | 'journal' | 'mento') => {
+  const navigateTo = (
+    view: 'landing' | 'dashboard' | 'checkin' | 'team' | 'settings' | 'history' | 'journal' | 'mento'
+  ) => {
     setCurrentView(view);
   };
 
@@ -60,17 +72,26 @@ function App() {
       case 'team':
         return <TeamSync onNavigate={navigateTo} />;
       case 'settings':
-        return <Settings user={user} updateUser={updateUser} onNavigate={navigateTo} onSignOut={handleSignOut} />;
+        return (
+          <Settings
+            user={user}
+            updateUser={updateUser}
+            onNavigate={navigateTo}
+            onSignOut={handleSignOut}
+          />
+        );
       case 'history':
         return <History user={user} onNavigate={navigateTo} />;
       case 'journal':
-        return <Journal 
-          user={user} 
-          onAddEntry={addJournalEntry}
-          onUpdateEntry={updateJournalEntry}
-          onDeleteEntry={deleteJournalEntry}
-          onNavigate={navigateTo} 
-        />;
+        return (
+          <Journal
+            user={user}
+            onAddEntry={addJournalEntry}
+            onUpdateEntry={updateJournalEntry}
+            onDeleteEntry={deleteJournalEntry}
+            onNavigate={navigateTo}
+          />
+        );
       case 'mento':
         return <MentoAI user={user} onNavigate={navigateTo} />;
       default:
@@ -81,13 +102,28 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F6F9FC] to-[#E6F0FF] relative overflow-hidden">
       {currentView !== 'landing' && (
-        <Navigation 
-          currentView={currentView} 
-          onNavigate={navigateTo} 
-          userMode={user.mode}
-        />
+        <Navigation currentView={currentView} onNavigate={navigateTo} userMode={user.mode} />
       )}
       {renderView()}
+
+      {/* Built with Bolt.new badge */}
+      <a
+        href="https://bolt.new"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          position: 'fixed',
+          bottom: '10px',
+          right: '10px',
+          zIndex: 9999,
+        }}
+      >
+        <img
+          src="https://bolt.new/badge.svg"
+          alt="Built with Bolt.new"
+          style={{ height: '40px' }}
+        />
+      </a>
     </div>
   );
 }
