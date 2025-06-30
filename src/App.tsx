@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from './hooks/useAuth';
 import { useUserData } from './hooks/useUserData';
 import { useTeams } from './hooks/useTeams';
-import { useDarkMode } from './hooks/useDarkMode';
 import AuthForm from './components/AuthForm';
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
@@ -18,9 +17,6 @@ function App() {
   const { user: authUser, loading: authLoading, signOut } = useAuth();
   const { user, loading: userLoading, updateUser, addCheckIn, addJournalEntry, updateJournalEntry, deleteJournalEntry } = useUserData(authUser);
   const [currentView, setCurrentView] = useState<'landing' | 'dashboard' | 'checkin' | 'team' | 'settings' | 'history' | 'journal' | 'mento'>('landing');
-  
-  // Initialize dark mode
-  useDarkMode();
 
   const navigateTo = (view: 'landing' | 'dashboard' | 'checkin' | 'team' | 'settings' | 'history' | 'journal' | 'mento') => {
     setCurrentView(view);
@@ -34,10 +30,10 @@ function App() {
   // Show loading screen while checking authentication
   if (authLoading || (authUser && userLoading)) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#F6F9FC] to-[#E6F0FF] dark:from-gray-900 dark:to-gray-800 flex items-center justify-center transition-colors duration-300">
+      <div className="min-h-screen bg-gradient-to-br from-[#F6F9FC] to-[#E6F0FF] flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-[#A5E3D8] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="font-inter text-[#334155]/70 dark:text-gray-300">Loading your mind sync...</p>
+          <p className="font-inter text-[#334155]/70">Loading your mind sync...</p>
         </div>
       </div>
     );
@@ -83,7 +79,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F6F9FC] to-[#E6F0FF] dark:from-gray-900 dark:to-gray-800 relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-[#F6F9FC] to-[#E6F0FF] relative overflow-hidden">
       {currentView !== 'landing' && (
         <Navigation 
           currentView={currentView} 
