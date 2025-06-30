@@ -4,6 +4,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
   body {
     font-family: 'Inter', sans-serif;
     letter-spacing: 0.5px;
@@ -53,6 +57,11 @@
     background: #E2E8F0;
     outline: none;
     border-radius: 15px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dark .slider {
+    background: #374151;
   }
   
   .slider::-webkit-slider-thumb {
