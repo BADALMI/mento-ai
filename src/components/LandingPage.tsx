@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Brain, Users, Zap, Heart, ArrowRight } from 'lucide-react';
+import { Brain, Users, Zap, Heart, ArrowRight, Shield, Clock, Target } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useTeams } from '../hooks/useTeams';
 import FloatingBlobs from './FloatingBlobs';
@@ -66,78 +66,194 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       <FloatingBlobs />
       
       {/* Hero Section */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-12 pt-20 pb-32">
-        <div className="text-center mb-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20">
+        <div className="text-center mb-20">
           <div className="flex justify-center mb-8">
             <div className="p-4 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
               <Brain className="w-12 h-12 text-[#A5E3D8]" />
             </div>
           </div>
           
-          <h1 className="font-sora font-semibold text-5xl sm:text-6xl lg:text-7xl text-[#334155] mb-6 tracking-tight leading-tight">
-            Your Mind.<br />
-            <span className="text-[#A5E3D8]">In Sync.</span>
+          <h1 className="font-sora font-semibold text-4xl sm:text-5xl lg:text-6xl text-[#334155] mb-6 tracking-tight leading-tight max-w-4xl mx-auto">
+            🧠 Feel something, but can't explain it?<br />
+            <span className="text-[#A5E3D8]">Meet MENTO</span> — your AI therapist companion.
           </h1>
           
-          <p className="font-inter text-xl sm:text-2xl text-[#334155]/80 mb-12 max-w-2xl mx-auto leading-relaxed tracking-wide">
-            Mento AI helps you stay emotionally aligned, mentally fit, and productive — solo or as a team.
+          <p className="font-inter text-xl sm:text-2xl text-[#334155]/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+            It reads between your thoughts, tracks your emotional patterns, and helps you heal.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="bg-white/20 backdrop-blur-sm p-8 rounded-3xl border border-white/30 shadow-lg max-w-2xl mx-auto mb-12">
+            <h2 className="font-sora font-semibold text-2xl text-[#334155] mb-4">
+              Don't wait till burnout.
+            </h2>
+            <p className="font-inter text-lg text-[#334155]/80 mb-6 leading-relaxed">
+              Most people ignore their mental health until it screams.<br />
+              You don't have to.
+            </p>
+            <p className="font-inter text-lg text-[#334155]/80 mb-8">
+              Start journaling today — and finally see what's going on inside you.
+            </p>
+            
             <button 
               onClick={() => onNavigate('dashboard')}
-              className="group bg-[#A5E3D8] text-[#334155] px-8 py-4 rounded-2xl font-inter font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-[#8DD3C7] hover:scale-105 flex items-center gap-2"
+              className="group bg-[#A5E3D8] text-[#334155] px-10 py-4 rounded-2xl font-inter font-semibold text-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-[#8DD3C7] hover:scale-105 flex items-center gap-3 mx-auto"
             >
-              🧘 Start Solo
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button 
-              onClick={() => setShowCreateModal(true)}
-              className="group bg-[#A5E3D8] text-[#334155] px-8 py-4 rounded-2xl font-inter font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-[#8DD3C7] hover:scale-105 flex items-center gap-2"
-            >
-              🧑‍🤝‍🧑 Create a Team Space
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button
-              onClick={() => setShowJoinModal(true)}
-              className="group bg-white/20 backdrop-blur-sm text-[#334155] px-8 py-4 rounded-2xl font-inter font-medium text-lg border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105 flex items-center gap-2"
-            >
-              🤝 Join a Team Space
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              Start Your Journey
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
-        
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mt-24">
-          <div className="bg-white/20 backdrop-blur-sm p-8 rounded-3xl border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105">
-            <div className="text-4xl mb-4">💭</div>
-            <h3 className="font-sora font-semibold text-xl text-[#334155] mb-3">
-              Daily mental check-ins that actually feel good
-            </h3>
-            <p className="font-inter text-[#334155]/70 leading-relaxed">
-              Simple, non-judgmental ways to sync with your inner state
+
+        {/* Emotional Pain Point Section */}
+        <div className="bg-[#FFDBD3]/20 backdrop-blur-sm p-12 rounded-3xl border border-[#FFDBD3]/30 shadow-lg mb-20">
+          <h2 className="font-sora font-semibold text-3xl sm:text-4xl text-[#334155] mb-8 text-center">
+            Why do you feel what you feel?
+          </h2>
+          <div className="max-w-4xl mx-auto">
+            <p className="font-inter text-xl text-[#334155] mb-6 leading-relaxed text-center">
+              You feel left out. Anxious. Maybe angry or just numb.<br />
+              But you don't know why.
+            </p>
+            <p className="font-inter text-xl text-[#334155] leading-relaxed text-center">
+              MENTO helps you decode your emotions by analyzing your real, everyday moments — not a one-time test or generic advice.
+            </p>
+          </div>
+        </div>
+
+        {/* How It Works Section */}
+        <div className="mb-20">
+          <h2 className="font-sora font-semibold text-3xl sm:text-4xl text-[#334155] mb-16 text-center">
+            How MENTO works
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="bg-white/20 backdrop-blur-sm p-8 rounded-3xl border border-white/30 shadow-lg text-center">
+              <div className="w-full h-48 bg-gradient-to-br from-[#A5E3D8]/20 to-[#C2E7FF]/20 rounded-2xl mb-6 flex items-center justify-center border border-white/20">
+                <span className="font-sora font-bold text-2xl text-[#334155]/50">STEP1</span>
+              </div>
+              <div className="text-4xl mb-4">📝</div>
+              <h3 className="font-sora font-semibold text-xl text-[#334155] mb-4">
+                You Journal Anything
+              </h3>
+              <p className="font-inter text-[#334155]/80 leading-relaxed">
+                Write whatever you feel — even one line a day.
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="bg-white/20 backdrop-blur-sm p-8 rounded-3xl border border-white/30 shadow-lg text-center">
+              <div className="w-full h-48 bg-gradient-to-br from-[#FFF6B3]/20 to-[#D2F8D2]/20 rounded-2xl mb-6 flex items-center justify-center border border-white/20">
+                <span className="font-sora font-bold text-2xl text-[#334155]/50">STEP2</span>
+              </div>
+              <div className="text-4xl mb-4">🤖</div>
+              <h3 className="font-sora font-semibold text-xl text-[#334155] mb-4">
+                MENTO Analyzes Your Emotional Patterns
+              </h3>
+              <p className="font-inter text-[#334155]/80 leading-relaxed">
+                It tracks repeated emotional triggers, stress sources, and hidden issues.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="bg-white/20 backdrop-blur-sm p-8 rounded-3xl border border-white/30 shadow-lg text-center">
+              <div className="w-full h-48 bg-gradient-to-br from-[#FFDBD3]/20 to-[#A5E3D8]/20 rounded-2xl mb-6 flex items-center justify-center border border-white/20">
+                <span className="font-sora font-bold text-2xl text-[#334155]/50">STEP3</span>
+              </div>
+              <div className="text-4xl mb-4">💬</div>
+              <h3 className="font-sora font-semibold text-xl text-[#334155] mb-4">
+                Your Personal AI Therapist Chats With You
+              </h3>
+              <p className="font-inter text-[#334155]/80 leading-relaxed">
+                Based on your patterns, MENTO talks to you like a real companion, offering coping strategies, clarity, and calm.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Trust + Why AI Section */}
+        <div className="bg-[#C2E7FF]/20 backdrop-blur-sm p-12 rounded-3xl border border-[#C2E7FF]/30 shadow-lg mb-20">
+          <h2 className="font-sora font-semibold text-3xl sm:text-4xl text-[#334155] mb-8 text-center">
+            Why an AI therapist?
+          </h2>
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <p className="font-inter text-xl text-[#334155] mb-6 leading-relaxed">
+              Because no one knows your story like you do.
+            </p>
+            <p className="font-inter text-xl text-[#334155] leading-relaxed">
+              MENTO listens without judgment, tracks your mental health like a pro, and gives you 24/7 support — powered by psychology, not guesswork.
             </p>
           </div>
           
-          <div className="bg-white/20 backdrop-blur-sm p-8 rounded-3xl border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105">
-            <div className="text-4xl mb-4">⚡</div>
-            <h3 className="font-sora font-semibold text-xl text-[#334155] mb-3">
-              Energy tracking without pressure
-            </h3>
-            <p className="font-inter text-[#334155]/70 leading-relaxed">
-              Understand your natural rhythms and work with them
-            </p>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white/30 backdrop-blur-sm p-6 rounded-2xl border border-white/30 text-center">
+              <Shield className="w-8 h-8 text-[#22C55E] mx-auto mb-4" />
+              <h3 className="font-sora font-semibold text-lg text-[#334155] mb-2">
+                ✅ Private & Secure
+              </h3>
+              <p className="font-inter text-[#334155]/70">
+                Your thoughts stay yours
+              </p>
+            </div>
+            
+            <div className="bg-white/30 backdrop-blur-sm p-6 rounded-2xl border border-white/30 text-center">
+              <Brain className="w-8 h-8 text-[#A5E3D8] mx-auto mb-4" />
+              <h3 className="font-sora font-semibold text-lg text-[#334155] mb-2">
+                ✅ Based on Journaling Psychology
+              </h3>
+              <p className="font-inter text-[#334155]/70">
+                Science-backed approach
+              </p>
+            </div>
+            
+            <div className="bg-white/30 backdrop-blur-sm p-6 rounded-2xl border border-white/30 text-center">
+              <Target className="w-8 h-8 text-[#F59E0B] mx-auto mb-4" />
+              <h3 className="font-sora font-semibold text-lg text-[#334155] mb-2">
+                ✅ Trained to Recognize Emotional Patterns
+              </h3>
+              <p className="font-inter text-[#334155]/70">
+                Personalized insights
+              </p>
+            </div>
           </div>
-          
-          <div className="bg-white/20 backdrop-blur-sm p-8 rounded-3xl border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105">
-            <div className="text-4xl mb-4">🤝</div>
-            <h3 className="font-sora font-semibold text-xl text-[#334155] mb-3">
-              Optional team mode to stay emotionally connected
-            </h3>
-            <p className="font-inter text-[#334155]/70 leading-relaxed">
-              Build empathy and support within your team
+        </div>
+
+        {/* Final CTA Section */}
+        <div className="text-center">
+          <div className="bg-white/20 backdrop-blur-sm p-12 rounded-3xl border border-white/30 shadow-lg max-w-3xl mx-auto">
+            <h2 className="font-sora font-semibold text-3xl text-[#334155] mb-6">
+              Ready to understand yourself better?
+            </h2>
+            <p className="font-inter text-xl text-[#334155]/80 mb-8 leading-relaxed">
+              Join thousands who've found clarity through MENTO's AI-powered emotional intelligence.
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button 
+                onClick={() => onNavigate('dashboard')}
+                className="group bg-[#A5E3D8] text-[#334155] px-10 py-4 rounded-2xl font-inter font-semibold text-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-[#8DD3C7] hover:scale-105 flex items-center gap-3"
+              >
+                🧘 Start Solo Journey
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button 
+                onClick={() => setShowCreateModal(true)}
+                className="group bg-white/30 backdrop-blur-sm text-[#334155] px-10 py-4 rounded-2xl font-inter font-semibold text-xl border border-white/30 hover:bg-white/50 transition-all duration-300 hover:scale-105 flex items-center gap-3"
+              >
+                🤝 Create Team Space
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+            
+            <div className="mt-6">
+              <button
+                onClick={() => setShowJoinModal(true)}
+                className="group text-[#334155]/70 hover:text-[#334155] font-inter font-medium text-lg transition-colors underline decoration-dotted underline-offset-4"
+              >
+                Or join an existing team space
+              </button>
+            </div>
           </div>
         </div>
       </div>
